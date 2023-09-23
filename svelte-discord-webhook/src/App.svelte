@@ -1,30 +1,41 @@
 <script>
-	export let name;
-</script>
+// Specify the base URL for your application
+export const baseUrl = process.env.NODE_ENV === 'production' ? '/pw-pages/' : '/';
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+	let apiKey = '';
+	// Check for the 'key' parameter in the URL query string
+	let url = new URL(window.location.href);
+	let keyParam = url.searchParams.get('key');
 
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+	if (keyParam) {
+		apiKey = keyParam;
 	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	let webhookUrl = 'https://discord.com/api/webhooks/1154970491589767228/U_J2lCWTiTkyzUfAGEzWRh9wW2sKS-lwO9mt_gembh4fTOPyvGrZvoMKghT67aDhh_HB';
+	
+	function sendRequest() {
+	  if (!apiKey) {
+        alert('Please enter an API key. You can get one from https://politicsandwar.com/account/');
+        return;
+      }
+	  // Send a POST request with apiKey to webhookUrl
+	  fetch(webhookUrl, {
+		method: 'POST',
+		headers: {
+		  'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ apiKey }),
+	  });
 	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
+  </script>
+  
+  <main>
+	<h1>Svelte Discord Webhook</h1>
+	<label for="apiKey">API Key:</label>
+	<input type="text" id="apiKey" bind:value={apiKey} />
+  
+	<button on:click={sendRequest}>Send Request</button>
+  </main>
+  
+  <style>
+	@import 'css/tailwind.css';
+  </style>
