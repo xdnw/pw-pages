@@ -29,7 +29,7 @@ export const baseUrl = process.env.NODE_ENV === 'production' ? '/pw-pages/' : '/
   </script>
   
   <main>
-	<h1>Svelte Discord Webhook</h1>
+	<h1>Svelte Discord Webhook Test</h1>
 	<label for="apiKey">API Key:</label>
 	<input type="text" id="apiKey" bind:value={apiKey} />
   
