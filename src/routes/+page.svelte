@@ -2,6 +2,19 @@
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
+    import { onMount } from 'svelte';
+
+	var url = "http://locutus.link:8000/page/login"
+
+	var options = {
+		test: 'test'
+	}
+
+	onMount(async function() {
+        const response = await fetch(url);
+        let data = await response.json();
+		console.log(data)
+    });
 </script>
 
 <svelte:head>
@@ -12,12 +25,13 @@
 
 <section>
 	<header class="welcome-header">
-		<svg viewBox="0 0 100% 0" class="welcome">
+		<svg viewBox="0 0 100% 0" class="welcome" style="overflow: visible;">
 			<text x="50%" y="50%" dy=".35em" text-anchor="middle">
 			Locutus
 			</text>
 		</svg>
 	</header>
+
 	<!-- <div id=banner>Locutus</div> -->
 	<h1>
 		to your new<br />SvelteKit app
@@ -66,13 +80,13 @@ width: 100%;
 	display:block;
 	text-align:center;
 	text-transform: uppercase;
-	animation: stroke 5s forwards, banner 8s forwards;
+	animation: stroke 5s forwards, banner 6s forwards !important;
 	stroke-width: 4;
 	stroke: rgb(59, 70, 73); /* Set the outline color */
 	fill: rgb(254, 182, 75); /* Set the fill color */
 	font-size: 75px;
-	/* text-shadow:1px 1px 0 hsl(36, 99%, 65%),2px 2px 0 hsl(36, 99%, 62%),3px 3px 0 hsl(36, 99%, 60%),4px 4px 0 hsl(36, 99%, 58%),5px 5px 0 hsl(36, 99%, 56%),6px 6px 0 hsl(36, 99%, 54%),7px 7px 0 hsl(36, 99%, 52%),8px 8px 0 hsl(36, 99%, 50%),0 0 5px rgba(0,0,0,.05),1px 1px 3px rgba(0,0,0,.2),2px 2px 5px rgba(0,0,0,.2),4px 4px 10px rgba(0,0,0,.2),8px 8px 10px rgba(0,0,0,.2),16px 16px 20px rgba(0,0,0,.3); */
-	text-shadow:1px 1px 0 hsl(36, 99%, 32.5%),2px 2px 0 hsl(36, 99%, 31%),3px 3px 0 hsl(36, 99%, 30%),4px 4px 0 hsl(36, 99%, 29%),5px 5px 0 hsl(36, 99%, 28%),6px 6px 0 hsl(36, 99%, 27%),7px 7px 0 hsl(36, 99%, 26%),8px 8px 0 hsl(36, 99%, 25%),0 0 5px rgba(0,0,0,.05),1px 1px 3px rgba(0,0,0,.2),2px 2px 5px rgba(0,0,0,.2),4px 4px 10px rgba(0,0,0,.2),8px 8px 10px rgba(0,0,0,.2),16px 16px 20px rgba(0,0,0,.3);
+	/* text-shadow:1px 1px 0 hsl(36, 99%, 65%),2px 2px 0 hsl(36, 99%, 62%),3px 3px 0 hsl(36, 99%, 60%),4px 4px 0 hsl(36, 99%, 58%),5px 5px 0 hsl(36, 99%, 56%),6px 6px 0 hsl(36, 99%, 54%),7px 7px 0 hsl(36, 99%, 52%),8px 8px 0 hsl(36, 99%, 50%),0 0 5px rgba(255,255,255,.05),1px 1px 3px rgba(255,255,255,.2),2px 2px 5px rgba(255,255,255,.2),4px 4px 10px rgba(255,255,255,.2),8px 8px 10px rgba(255,255,255,.2),16px 16px 20px rgba(255,255,255,.3); */
+	text-shadow:1px 1px 0 hsl(36, 99%, 32.5%),2px 2px 0 hsl(36, 99%, 31%),3px 3px 0 hsl(36, 99%, 30%),4px 4px 0 hsl(36, 99%, 29%),5px 5px 0 hsl(36, 99%, 28%),6px 6px 0 hsl(36, 99%, 27%),7px 7px 0 hsl(36, 99%, 26%),8px 8px 0 hsl(36, 99%, 25%),0 0 5px rgba(255,255,255,.05),1px 1px 3px rgba(255,255,255,.2),2px 2px 5px rgba(255,255,255,.2),4px 4px 10px rgba(255,255,255,.2),8px 8px 10px rgba(255,255,255,.2),16px 16px 20px rgba(255,255,255,.3);
 }
 
   @keyframes stroke {
@@ -124,9 +138,11 @@ width: 100%;
     transform:translate(0,0)
   }
 }
+::-moz-selection { /* Code for Firefox */
+  background: rgb(255, 202, 121);
+}
 
-
-body {
-    overflow-x: hidden;
-  }
+::selection {
+  background: rgb(255, 202, 121);
+}
 </style>
